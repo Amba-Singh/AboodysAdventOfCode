@@ -1001,13 +1001,35 @@ tfn5kx6twojmzgbdznc2
 5bszzkpcdxqkvkf7tgcone2
 '''
 
-mainlist,sum= mainstring.split(), 0
+mainlist, sum0 = mainstring.split(), 0
 for mainlistitem in mainlist:
     templist = []
     for char in mainlistitem:
         if char.isdigit():
             templist.append(char)
     tempvar = templist[0] + templist[-1]
-    sum = sum + int(tempvar)
-print(sum)
+    sum0 = sum0 + int(tempvar)
 
+altered0MainString = mainstring.replace('zero', 'z0o')
+altered1MainString = altered0MainString.replace('one', 'o1e')
+altered2MainString = altered1MainString.replace('two', 't2o')
+altered3MainString = altered2MainString.replace('three', 't3e')
+altered4MainString = altered3MainString.replace('four', 'f4r')
+altered5MainString = altered4MainString.replace('five', 'f5e')
+altered6MainString = altered5MainString.replace('six', 's6x')
+altered7MainString = altered6MainString.replace('seven', 's7n')
+altered8MainString = altered7MainString.replace('eight', 'e8t')
+altered9MainString = altered8MainString.replace('nine', 'n9e')
+sum1 = 0
+FinalAltered = altered9MainString.split()
+print(FinalAltered)
+for EachIndividualLine in FinalAltered:
+    TheList = []
+    for character in EachIndividualLine:
+        if character.isdigit():
+            TheList.append(character)
+    tempvar1 = TheList[0] + TheList[-1]
+    print(tempvar1)
+
+    sum1 = sum1 + int(tempvar1)
+print(sum1)
