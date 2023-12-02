@@ -1001,20 +1001,13 @@ tfn5kx6twojmzgbdznc2
 5bszzkpcdxqkvkf7tgcone2
 '''
 
-mainlist = mainstring.split()
-sum = 0
+mainlist,sum= mainstring.split(), 0
 for mainlistitem in mainlist:
     templist = []
     for char in mainlistitem:
         if char.isdigit():
             templist.append(char)
-    if templist.__len__() > 1:
-        tempvar = templist[0] + templist[-1]
-        print(tempvar)
-        sum = sum + int(tempvar)
-    else:
-        print(templist[0])
-        tempvar = templist[0] + templist[0]
-        sum = sum + int(tempvar)
+    tempvar = templist[0] + templist[-1]
+    sum = sum + int(tempvar)
 print(sum)
 
