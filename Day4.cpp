@@ -1,4 +1,3 @@
-//------------------------------------------- PART 1 ---------------------------------------------------------------------------------------------------------
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -26,22 +25,35 @@ std::vector<std::string> abdoSplit(std::string x, char delim, std::vector<std::s
 }
 
 int main()
-{
+{ 
+    std::string x = "onetwo";
+    std::string y = "onetwo";
+    
+    
     std::fstream myFile;
     myFile.open("input.txt", std::fstream::in);
     std::string oneLine;
 
     int totalPoints = 0;
+    std::vector<std::string> allCards;
+
 
     for (int a = 0; !myFile.eof(); a++) {
         getline(myFile, oneLine);
-        std::string cardnumber = oneLine.substr(0, oneLine.find(':'));
-        std::string winningNumbersString = oneLine.substr(oneLine.find(':')+2,oneLine.find('|') - oneLine.find(':') - 3);
+        allCards.push_back(oneLine);
+    }
+    std::vector <std::vector<std::string>> yeee;
+
+    
+    for (int oneLine = 0; oneLine < allCards.size(); oneLine++) {
+        //std::cout << allCards[oneLine] << "\n";
+        std::string cardnumber = allCards[oneLine].substr(0, allCards[oneLine].find(':'));
+        std::string winningNumbersString = allCards[oneLine].substr(allCards[oneLine].find(':')+2,allCards[oneLine].find('|') - allCards[oneLine].find(':') - 3);
         while (winningNumbersString.find("  ") != std::string::npos) { winningNumbersString.replace(winningNumbersString.find("  "), 2, " 0");}
         if (winningNumbersString[0] == ' ') {
             winningNumbersString[0] = '0';
         }
-        std::string numbersYouHaveString = oneLine.substr(oneLine.find('|') + 2);
+        std::string numbersYouHaveString = allCards[oneLine].substr(allCards[oneLine].find('|') + 2);
         while (numbersYouHaveString.find("  ") != std::string::npos) { numbersYouHaveString.replace(numbersYouHaveString.find("  "), 2, " 0"); }
         if (numbersYouHaveString[0] == ' ') {
             numbersYouHaveString[0] = '0';
@@ -60,20 +72,40 @@ int main()
             splitNumbersYouHaveAsIntegers.push_back(stoi(splitNumbersYouHave[numberYouHave]));
         }
 
-        
-
+        int  cardWins = 0;
         double cardScore = 0.5;
-        for (int a = 0; a < splitWinningNumbersAsIntegers.size(); a++) {
+        for (int a = 0; a < splitWinningNumbersAsIntegers.size() ; a++) {
             for (int b = 0; b < splitNumbersYouHaveAsIntegers.size(); b++) {
                 if (splitWinningNumbersAsIntegers[a] == splitNumbersYouHaveAsIntegers[b]) {
                     cardScore = cardScore * 2;
+                    cardWins++;
                 }
             }
         }
+
+
         if (cardScore > 0.5) {
             totalPoints += cardScore;
         }
+        std::vector<std::string> tempVector = { cardnumber, winningNumbersString, numbersYouHaveString };
+        yeee.push_back(tempVector);
+
+        for (int x = 0; x < yeee.size(); x++) {
+            if (yeee[x][0] == cardnumber) {
+
+                for (int win = 1; win < cardWins + 1; win++) {
+                    std::vector<std::string> tempVector2 = { allCards[oneLine + win].substr(0, allCards[oneLine + win].find(':')) , "hi" };
+                    yeee.push_back(tempVector2);
+
+                }
+            }
+        }
+
+        std::cout <<"for loop iteration : " << oneLine << "   card wins are : " << cardWins<< "\n";
     }
-    
+
+
+
     std::cout << "Total is: " << totalPoints;
+    std::cout << "Number of cards is : " << yeee.size(); 
 }
