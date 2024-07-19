@@ -28,3 +28,42 @@ std::vector<std::string> abdoSplit(std::string x, char delim, std::vector<std::s
     }
 //OUTPUT : "ONE\nTWO\nTHREE\nFOUR\nFIVE"
 //-------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+another usage?example? idk 
+
+
+
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <string>
+
+void ABDOsplit(const std::string& input, char delimiter, std::vector<std::string>& result) {
+    std::istringstream stream(input);
+    std::string token;
+
+    while (std::getline(stream, token, delimiter)) {
+        result.push_back(token);
+    }
+}
+
+int main() {
+    // Example usage
+    std::string inputString = "Hello,World,Split,Me";
+    char delimiter = ',';
+    std::vector<std::string> resultVector;
+
+    ABDOsplit(inputString, delimiter, resultVector);
+
+    // Display the result
+    std::cout << "Original String: " << inputString << std::endl;
+    std::cout << "Delimiter: " << delimiter << std::endl;
+    std::cout << "Split Strings: ";
+    for (const auto& str : resultVector) {
+        std::cout << "\"" << str << "\n";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
